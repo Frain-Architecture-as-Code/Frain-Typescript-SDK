@@ -30,3 +30,15 @@ export class ExternalSystem extends FrainNode {
         super(name, description, "ExternalSystem");
     }
 }
+
+export class Container extends FrainNode {
+    constructor(name: string, description: string, technology: string) {
+        super(name, description, technology);
+    }
+}
+
+export class Component extends FrainNode {
+    constructor(name: string, description: string, technology: string) {
+        super(name, description, technology);
+    }
+}
