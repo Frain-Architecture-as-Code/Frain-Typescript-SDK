@@ -1,7 +1,12 @@
 import { Frain } from "../src/frain";
 
 function main() {
-    const frain = new Frain({ apiKey: "asdasd", projectId: "asdasd" });
+    const frain = new Frain({
+        apiKey: "asdasd",
+        projectId: "asdasd",
+        title: "ACME",
+        description: "This is a sample application",
+    });
 
     const context = frain.createContextView();
 
@@ -31,7 +36,7 @@ function main() {
         technology: "Next Js",
     });
 
-    container.addContainer({
+    const api = container.addContainer({
         name: "API",
         description: "A Restfull API",
         technology: "Spring Boot - Java 25",
@@ -42,6 +47,9 @@ function main() {
         description: "A database",
         technology: "PostgreSQL",
     });
+
+    // Create a Component view
+    const apiView = frain.createComponentView();
 }
 
 main();

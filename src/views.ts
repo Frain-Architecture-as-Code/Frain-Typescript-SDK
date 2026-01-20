@@ -10,4 +10,8 @@ export abstract class View {
     protected addElement(element: FrainNode): void {
         this.elements.push(element);
     }
+
+    protected addElements(elements: FrainNode[]): void {
+        this.elements.push(...elements);
+    }
 }

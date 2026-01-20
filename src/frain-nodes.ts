@@ -1,3 +1,5 @@
+import { FrainRelation } from "./frain-relation";
+
 export abstract class FrainNode {
     private id: string;
 
@@ -5,11 +7,30 @@ export abstract class FrainNode {
     private description: string;
     private technology: string;
 
+    private relations: FrainRelation[];
+
     constructor(name: string, description: string, technology: string) {
         this.id = crypto.randomUUID();
         this.name = name;
         this.description = description;
         this.technology = technology;
+
+        this.relations = [];
+    }
+
+    private use(
+        target: FrainNode,
+        description: string,
+        technology: string,
+    ): FrainRelation {
+        const relation = new FrainRelation(
+            this.id,
+            target.id,
+            description,
+            technology,
+        );
+        this.relations.push(relation);
+        return relation;
     }
 }
 

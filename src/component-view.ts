@@ -1,7 +1,10 @@
+import type { Container } from "./frain-nodes";
 import { View } from "./views";
 
 export class ComponentView extends View {
-    constructor() {
+    private container: Container;
+    constructor(container: Container) {
         super();
+        this.container = container;
     }
 }
