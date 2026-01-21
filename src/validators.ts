@@ -2,13 +2,45 @@ import { z } from "zod";
 import { NodeType, ViewType } from "./types";
 
 /**
- * Zod schema for validating the type of a node.
+ * Schema for validating the Frain config
+ */
+export const frainConfigSchema = z.object({
+    projectId: z.uuid({ message: "Project ID must be a valid UUID" }),
+    apiKey: z.string().min(1, { message: "API key cannot be empty" }),
+    description: z
+        .string()
+        .min(1, { message: "Description cannot be empty" })
+        .max(500, { message: "Description cannot exceed 500 characters" }),
+    title: z
+        .string()
+        .min(1, { message: "Title cannot be empty" })
+        .max(255, { message: "Title cannot exceed 255 characters" }),
+});
+
+/**
+ * Schema for validation FrainNode creation
+ */
+export const creationFrainNodeSchema = z.object({
+    projectId: z.uuid({ message: "Project ID must be a valid UUID" }),
+    apiKey: z.string().min(1, { message: "API key cannot be empty" }),
+    description: z
+        .string()
+        .min(1, { message: "Description cannot be empty" })
+        .max(500, { message: "Description cannot exceed 500 characters" }),
+    title: z
+        .string()
+        .min(1, { message: "Title cannot be empty" })
+        .max(255, { message: "Title cannot exceed 255 characters" }),
+});
+
+/**
+ * Schema for validating the type of a node.
  * Corresponds to the NodeType enum.
  */
 export const nodeTypeSchema = z.enum(NodeType);
 
 /**
- * Zod schema for validating a single Frain node.
+ * Schema for validating a single Frain node.
  * Corresponds to the FrainNodeJSON interface.
  */
 export const frainNodeSchema = z.object({
@@ -20,7 +52,7 @@ export const frainNodeSchema = z.object({
 });
 
 /**
- * Zod schema for validating a relation between two nodes.
+ * Schema for validating a relation between two nodes.
  * Corresponds to the FrainRelationJSON interface.
  */
 export const frainRelationSchema = z.object({
@@ -31,13 +63,13 @@ export const frainRelationSchema = z.object({
 });
 
 /**
- * Zod schema for validating the type of a view.
+ * Schema for validating the type of a view.
  * Corresponds to the ViewType enum.
  */
 export const viewTypeSchema = z.enum(ViewType);
 
 /**
- * Zod schema for validating a Frain view, containing nodes and relations.
+ * Schema for validating a Frain view, containing nodes and relations.
  * Corresponds to the FrainViewJSON interface.
  */
 export const frainViewSchema = z.object({
@@ -49,7 +81,7 @@ export const frainViewSchema = z.object({
 });
 
 /**
- * Zod schema for validating the entire output structure.
+ * Schema for validating the entire output structure.
  * Matches the return type of Frain.build().
  */
 export const frainOutputSchema = z.object({

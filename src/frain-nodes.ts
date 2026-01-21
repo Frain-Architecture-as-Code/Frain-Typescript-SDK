@@ -1,5 +1,6 @@
 import { FrainRelation } from "./frain-relation";
 import { NodeType, type FrainNodeJSON } from "./types";
+import { creationFrainNodeSchema } from "./validators";
 
 export abstract class FrainNode {
     private id: string;
@@ -17,6 +18,13 @@ export abstract class FrainNode {
         technology: string,
         type: NodeType,
     ) {
+        creationFrainNodeSchema.parse({
+            name,
+            description,
+            technology,
+            type,
+        });
+
         this.id = crypto.randomUUID();
         this.name = name;
         this.description = description;

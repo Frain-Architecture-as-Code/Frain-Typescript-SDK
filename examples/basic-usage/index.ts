@@ -4,7 +4,7 @@ import { NodeType } from "../../src/types";
 async function main() {
     const frain = new Frain({
         apiKey: "asdasd",
-        projectId: "asdasd",
+        projectId: "d3b92d6a-786a-406f-ae1c-7cfbdf81d4b1",
         title: "ACME",
         description: "This is a sample application",
     });

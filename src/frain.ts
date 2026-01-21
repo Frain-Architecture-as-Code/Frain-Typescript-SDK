@@ -3,6 +3,7 @@ import { ContainerView } from "./container-view";
 import { ContextView } from "./context-view";
 import type { Component, System } from "./frain-nodes";
 import type { FrainConfig } from "./types";
+import { frainConfigSchema } from "./validators";
 import type { View } from "./views";
 
 export class Frain {
@@ -15,6 +16,8 @@ export class Frain {
     private views: View[];
 
     constructor({ projectId, apiKey, description, title }: FrainConfig) {
+        frainConfigSchema.parse({ projectId, apiKey, description, title });
+
         this.projectId = projectId;
         this.apiKey = apiKey;
         this.views = [];

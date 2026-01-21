@@ -1,4 +1,5 @@
 import type { FrainRelationJSON } from "./types";
+import { frainRelationSchema } from "./validators";
 
 export class FrainRelation {
     private sourceId: string;
@@ -12,6 +13,13 @@ export class FrainRelation {
         description: string,
         technology: string,
     ) {
+        frainRelationSchema.parse({
+            sourceId,
+            targetId,
+            description,
+            technology,
+        });
+
         this.sourceId = sourceId;
         this.targetId = targetId;
         this.description = description;
