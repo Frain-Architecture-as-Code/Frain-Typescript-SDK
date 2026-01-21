@@ -32,6 +32,7 @@ export class ComponentView extends View {
             name: componentName,
             mainNodeId: id,
             nodes: this.nodes.map((node) => node.toJson()),
+            relations: this.getRelationsJSON(),
         };
     }
 }

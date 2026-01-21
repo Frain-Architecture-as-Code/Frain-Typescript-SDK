@@ -49,6 +49,7 @@ export class ContextView extends View {
             mainNodeId: "",
             name: "",
             nodes: this.nodes.map((node) => node.toJson()),
+            relations: this.getRelationsJSON(),
         };
     }
 }

@@ -32,6 +32,7 @@ export class ContainerView extends View {
             mainNodeId: id,
             name: systemName,
             nodes: this.nodes.map((node) => node.toJson()),
+            relations: this.getRelationsJSON(),
         };
     }
 }

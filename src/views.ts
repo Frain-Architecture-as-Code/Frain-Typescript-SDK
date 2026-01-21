@@ -1,5 +1,5 @@
 import type { FrainNode } from "./frain-nodes";
-import type { FrainViewJSON, ViewType } from "./types";
+import type { FrainRelationJSON, FrainViewJSON, ViewType } from "./types";
 
 export abstract class View {
     protected nodes: FrainNode[];
@@ -20,6 +20,20 @@ export abstract class View {
 
     public getNodes(): FrainNode[] {
         return this.nodes;
+    }
+
+    protected getRelationsJSON(): FrainRelationJSON[] {
+        const nodeIds = new Set(this.nodes.map((node) => node.getId()));
+        const relations: FrainRelationJSON[] = [];
+
+        for (const node of this.nodes) {
+            for (const relation of node.getRelations()) {
+                if (nodeIds.has(relation.getTargetId())) {
+                    relations.push(relation.toJson());
+                }
+            }
+        }
+        return relations;
     }
 
     abstract toJson(): FrainViewJSON;

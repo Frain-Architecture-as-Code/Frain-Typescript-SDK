@@ -30,9 +30,17 @@ export interface FrainNodeJSON {
     technology: string;
 }
 
+export interface FrainRelationJSON {
+    sourceId: string;
+    targetId: string;
+    description: string;
+    technology: string;
+}
+
 export interface FrainViewJSON {
     type: ViewType;
     mainNodeId: string;
     name: string;
     nodes: FrainNodeJSON[];
+    relations: FrainRelationJSON[];
 }

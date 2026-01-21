@@ -8,102 +8,162 @@
             "name": "",
             "nodes": [
                 {
-                    "id": "3b683592-273c-49c3-b99c-3fa39a7785ce",
+                    "id": "b2ec94cc-53a6-48e6-9e45-a3b2547ac5e3",
                     "type": "PERSON",
                     "name": "John Doe",
                     "description": "A person",
                     "technology": "Person"
                 },
                 {
-                    "id": "32d9b271-4657-48e8-a9d5-63b65227e59c",
+                    "id": "53fff2dc-7634-4330-a2bd-5a9bde57854a",
                     "type": "SYSTEM",
                     "name": "Frain",
                     "description": "A system",
                     "technology": "System"
                 },
                 {
-                    "id": "c5b5ee0e-d706-4788-88d9-a6c01645f38f",
+                    "id": "e9250915-36c3-4698-bcb5-3cef909538b1",
                     "type": "EXTERNAL_SYSTEM",
                     "name": "Paypal",
                     "description": "An external system",
                     "technology": "ExternalSystem"
                 }
+            ],
+            "relations": [
+                {
+                    "sourceId": "b2ec94cc-53a6-48e6-9e45-a3b2547ac5e3",
+                    "targetId": "53fff2dc-7634-4330-a2bd-5a9bde57854a",
+                    "description": "uses",
+                    "technology": ""
+                },
+                {
+                    "sourceId": "53fff2dc-7634-4330-a2bd-5a9bde57854a",
+                    "targetId": "e9250915-36c3-4698-bcb5-3cef909538b1",
+                    "description": "uses",
+                    "technology": "As payment gateway"
+                }
             ]
         },
         {
             "type": "CONTAINER",
-            "mainNodeId": "32d9b271-4657-48e8-a9d5-63b65227e59c",
+            "mainNodeId": "53fff2dc-7634-4330-a2bd-5a9bde57854a",
             "name": "Frain",
             "nodes": [
                 {
-                    "id": "9257554b-f831-4b62-bf92-e7ce0096d161",
+                    "id": "f9adaf64-1461-4733-a920-8398ac91d6f4",
                     "type": "CONTAINER",
                     "name": "Web App",
                     "description": "A web application",
                     "technology": "Next Js"
                 },
                 {
-                    "id": "4ea48ea8-e6d8-438b-8d3c-72101457eefc",
+                    "id": "59f219cd-dfd7-4d53-bff0-c013c7349fc2",
                     "type": "CONTAINER",
                     "name": "API",
                     "description": "A Restfull API",
                     "technology": "Spring Boot - Java 25"
                 },
                 {
-                    "id": "e286cb54-6bda-4304-a206-78bc04fc6482",
+                    "id": "a9929a0f-fbaf-49dc-b513-f9c6ee7c4a8a",
                     "type": "DATABASE",
                     "name": "Database",
                     "description": "A database",
                     "technology": "PostgreSQL"
                 },
                 {
-                    "id": "3b683592-273c-49c3-b99c-3fa39a7785ce",
+                    "id": "b2ec94cc-53a6-48e6-9e45-a3b2547ac5e3",
                     "type": "PERSON",
                     "name": "John Doe",
                     "description": "A person",
                     "technology": "Person"
                 },
                 {
-                    "id": "c5b5ee0e-d706-4788-88d9-a6c01645f38f",
+                    "id": "e9250915-36c3-4698-bcb5-3cef909538b1",
                     "type": "EXTERNAL_SYSTEM",
                     "name": "Paypal",
                     "description": "An external system",
                     "technology": "ExternalSystem"
+                }
+            ],
+            "relations": [
+                {
+                    "sourceId": "f9adaf64-1461-4733-a920-8398ac91d6f4",
+                    "targetId": "59f219cd-dfd7-4d53-bff0-c013c7349fc2",
+                    "description": "uses",
+                    "technology": "As API"
+                },
+                {
+                    "sourceId": "59f219cd-dfd7-4d53-bff0-c013c7349fc2",
+                    "targetId": "a9929a0f-fbaf-49dc-b513-f9c6ee7c4a8a",
+                    "description": "uses",
+                    "technology": "As database"
+                },
+                {
+                    "sourceId": "59f219cd-dfd7-4d53-bff0-c013c7349fc2",
+                    "targetId": "e9250915-36c3-4698-bcb5-3cef909538b1",
+                    "description": "uses",
+                    "technology": "As payment gateway"
+                },
+                {
+                    "sourceId": "b2ec94cc-53a6-48e6-9e45-a3b2547ac5e3",
+                    "targetId": "f9adaf64-1461-4733-a920-8398ac91d6f4",
+                    "description": "uses",
+                    "technology": ""
                 }
             ]
         },
         {
             "type": "COMPONENT",
             "name": "API",
-            "mainNodeId": "4ea48ea8-e6d8-438b-8d3c-72101457eefc",
+            "mainNodeId": "59f219cd-dfd7-4d53-bff0-c013c7349fc2",
             "nodes": [
                 {
-                    "id": "fd252bd6-b3b1-4615-abe0-deb5610082c3",
+                    "id": "cf9af99f-03f0-48bb-867b-6e4c8ad2754f",
                     "type": "COMPONENT",
                     "name": "Shared Kernel",
                     "description": "A shared kernel",
                     "technology": "Spring Boot - Java 25"
                 },
                 {
-                    "id": "b2ae2fe1-51fe-428b-b920-4daff3fee2d7",
+                    "id": "974f70ac-aceb-48fe-9f51-63a81e937f3a",
                     "type": "COMPONENT",
                     "name": "Payments",
                     "description": "A payments component",
                     "technology": "Spring Boot - Java 25"
                 },
                 {
-                    "id": "c5b5ee0e-d706-4788-88d9-a6c01645f38f",
+                    "id": "e9250915-36c3-4698-bcb5-3cef909538b1",
                     "type": "EXTERNAL_SYSTEM",
                     "name": "Paypal",
                     "description": "An external system",
                     "technology": "ExternalSystem"
                 },
                 {
-                    "id": "9257554b-f831-4b62-bf92-e7ce0096d161",
+                    "id": "f9adaf64-1461-4733-a920-8398ac91d6f4",
                     "type": "CONTAINER",
                     "name": "Web App",
                     "description": "A web application",
                     "technology": "Next Js"
+                }
+            ],
+            "relations": [
+                {
+                    "sourceId": "974f70ac-aceb-48fe-9f51-63a81e937f3a",
+                    "targetId": "e9250915-36c3-4698-bcb5-3cef909538b1",
+                    "description": "uses",
+                    "technology": "As payment gateway"
+                },
+                {
+                    "sourceId": "974f70ac-aceb-48fe-9f51-63a81e937f3a",
+                    "targetId": "cf9af99f-03f0-48bb-867b-6e4c8ad2754f",
+                    "description": "uses",
+                    "technology": "As shared kernel"
+                },
+                {
+                    "sourceId": "f9adaf64-1461-4733-a920-8398ac91d6f4",
+                    "targetId": "974f70ac-aceb-48fe-9f51-63a81e937f3a",
+                    "description": "uses",
+                    "technology": "As payment gateway"
                 }
             ]
         }
