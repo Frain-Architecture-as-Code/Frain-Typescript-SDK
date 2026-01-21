@@ -1,8 +1,8 @@
+import type z from "zod";
 import { ComponentView } from "./component-view";
 import { ContainerView } from "./container-view";
 import { ContextView } from "./context-view";
 import type { Component, System } from "./frain-nodes";
-import type { FrainConfig } from "./types";
 import { frainConfigSchema } from "./validators";
 import type { View } from "./views";
 
@@ -15,15 +15,15 @@ export class Frain {
 
     private views: View[];
 
-    constructor({ projectId, apiKey, description, title }: FrainConfig) {
-        frainConfigSchema.parse({ projectId, apiKey, description, title });
+    constructor(config: z.infer<typeof frainConfigSchema>) {
+        const validated = frainConfigSchema.parse(config);
 
-        this.projectId = projectId;
-        this.apiKey = apiKey;
+        this.projectId = validated.projectId;
+        this.apiKey = validated.apiKey;
+        this.description = validated.description;
+        this.title = validated.title;
+
         this.views = [];
-
-        this.title = title;
-        this.description = description;
     }
 
     public createContextView(): ContextView {

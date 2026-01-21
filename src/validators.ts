@@ -18,22 +18,6 @@ export const frainConfigSchema = z.object({
 });
 
 /**
- * Schema for validation FrainNode creation
- */
-export const creationFrainNodeSchema = z.object({
-    projectId: z.uuid({ message: "Project ID must be a valid UUID" }),
-    apiKey: z.string().min(1, { message: "API key cannot be empty" }),
-    description: z
-        .string()
-        .min(1, { message: "Description cannot be empty" })
-        .max(500, { message: "Description cannot exceed 500 characters" }),
-    title: z
-        .string()
-        .min(1, { message: "Title cannot be empty" })
-        .max(255, { message: "Title cannot exceed 255 characters" }),
-});
-
-/**
  * Schema for validating the type of a node.
  * Corresponds to the NodeType enum.
  */
@@ -45,6 +29,17 @@ export const nodeTypeSchema = z.enum(NodeType);
  */
 export const frainNodeSchema = z.object({
     id: z.uuid({ message: "Node ID must be a valid UUID" }),
+    type: nodeTypeSchema,
+    name: z.string().min(1, { message: "Node name cannot be empty" }),
+    description: z.string(),
+    technology: z.string(),
+});
+
+/**
+ * Schema for validating a single Frain node.
+ * Corresponds to the FrainNodeJSON interface.
+ */
+export const frainNodeCreationSchema = z.object({
     type: nodeTypeSchema,
     name: z.string().min(1, { message: "Node name cannot be empty" }),
     description: z.string(),

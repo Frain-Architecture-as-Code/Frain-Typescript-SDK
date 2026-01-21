@@ -1,6 +1,6 @@
 import { FrainRelation } from "./frain-relation";
 import { NodeType, type FrainNodeJSON } from "./types";
-import { creationFrainNodeSchema } from "./validators";
+import { frainNodeCreationSchema, nodeTypeSchema } from "./validators";
 
 export abstract class FrainNode {
     private id: string;
@@ -18,7 +18,7 @@ export abstract class FrainNode {
         technology: string,
         type: NodeType,
     ) {
-        creationFrainNodeSchema.parse({
+        frainNodeCreationSchema.parse({
             name,
             description,
             technology,
@@ -65,6 +65,7 @@ export abstract class FrainNode {
         };
     }
     public setType(type: NodeType): void {
+        nodeTypeSchema.parse(type);
         this.type = type;
     }
 }

@@ -1,11 +1,13 @@
 import type { FrainNode } from "./frain-nodes";
 import type { FrainRelationJSON, FrainViewJSON, ViewType } from "./types";
+import { viewTypeSchema } from "./validators";
 
 export abstract class View {
     protected nodes: FrainNode[];
     protected type: ViewType;
 
     constructor(type: ViewType) {
+        viewTypeSchema.parse(type);
         this.nodes = [];
         this.type = type;
     }
