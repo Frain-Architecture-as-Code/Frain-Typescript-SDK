@@ -14,7 +14,7 @@ export class ContextView extends View {
         description: string;
     }): Person {
         const person = new Person(name, description);
-        this.addElement(person);
+        this.addNode(person);
         return person;
     }
 
@@ -26,7 +26,7 @@ export class ContextView extends View {
         description: string;
     }): System {
         const system = new System(name, description);
-        this.addElement(system);
+        this.addNode(system);
         return system;
     }
 
@@ -38,7 +38,7 @@ export class ContextView extends View {
         description: string;
     }): ExternalSystem {
         const externalSystem = new ExternalSystem(name, description);
-        this.addElement(externalSystem);
+        this.addNode(externalSystem);
         return externalSystem;
     }
 }

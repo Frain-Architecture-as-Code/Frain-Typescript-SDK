@@ -18,7 +18,7 @@ export abstract class FrainNode {
         this.relations = [];
     }
 
-    private use(
+    public use(
         target: FrainNode,
         description: string,
         technology: string,

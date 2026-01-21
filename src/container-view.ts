@@ -19,7 +19,7 @@ export class ContainerView extends View {
         technology: string;
     }): Container {
         const container = new Container(name, description, technology);
-        this.addElement(container);
+        this.addNode(container);
         return container;
     }
 }

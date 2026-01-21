@@ -7,11 +7,11 @@ export abstract class View {
         this.elements = [];
     }
 
-    protected addElement(element: FrainNode): void {
+    protected addNode(element: FrainNode): void {
         this.elements.push(element);
     }
 
-    protected addElements(elements: FrainNode[]): void {
+    public addNodes(elements: FrainNode[]): void {
         this.elements.push(...elements);
     }
 }

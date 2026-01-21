@@ -25,12 +25,13 @@ function main() {
         description: "An external system",
     });
 
-    // TODO: Add Relations
+    commonPerson.use(frainSystem, "uses", "");
+    frainSystem.use(paypal, "uses", "As payment gateway");
 
     // Create a container view
     const container = frain.createContainerView(frainSystem);
 
-    container.addContainer({
+    const webapp = container.addContainer({
         name: "Web App",
         description: "A web application",
         technology: "Next Js",
@@ -42,14 +43,21 @@ function main() {
         technology: "Spring Boot - Java 25",
     });
 
-    container.addContainer({
+    const db = container.addContainer({
         name: "Database",
         description: "A database",
         technology: "PostgreSQL",
     });
 
+    webapp.use(api, "uses", "As API");
+    webapp.use(db, "uses", "As database");
+
+    commonPerson.use(webapp, "uses", "");
+
     // Create a Component view
-    const apiView = frain.createComponentView();
+    const apiView = frain.createComponentView(api);
+    
+    
 }
 
 main();

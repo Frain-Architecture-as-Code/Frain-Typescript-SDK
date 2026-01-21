@@ -1,4 +1,4 @@
-import type { Container } from "./frain-nodes";
+import { Component, Container } from "./frain-nodes";
 import { View } from "./views";
 
 export class ComponentView extends View {
@@ -6,5 +6,19 @@ export class ComponentView extends View {
     constructor(container: Container) {
         super();
         this.container = container;
+    }
+
+    private addComponent({
+        name,
+        description,
+        technology,
+    }: {
+        name: string;
+        description: string;
+        technology: string;
+    }): Component {
+        const component = new Component(name, description, technology);
+        this.addNode(component);
+        return component;
     }
 }
