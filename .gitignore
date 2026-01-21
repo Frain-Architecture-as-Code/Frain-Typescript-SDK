@@ -35,3 +35,6 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Tasks to be done
 TODO.md
+
+# Output
+output.json

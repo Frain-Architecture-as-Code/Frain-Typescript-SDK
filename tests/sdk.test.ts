@@ -220,7 +220,11 @@ describe("Frain SDK Tests", () => {
 
             // Should only have 1 relation (P1 -> S1)
             expect(json.relations).toHaveLength(1);
-            expect(json.relations[0].targetId).toBe(s1.getId());
+
+            // Find the ID of S1 in the generated JSON
+            const s1JsonId = json.nodes.find((n) => n.name === "S1")?.id;
+            expect(s1JsonId).toBeDefined();
+            expect(json.relations[0].targetId).toBe(s1JsonId!);
         });
 
         test("should include relations added via addNodes from external context", () => {
@@ -252,8 +256,15 @@ describe("Frain SDK Tests", () => {
             // Now relation should be visible
             const json = view.toJson();
             expect(json.relations).toHaveLength(1);
-            expect(json.relations[0].sourceId).toBe(user.getId());
-            expect(json.relations[0].targetId).toBe(webApp.getId());
+
+            const userJsonId = json.nodes.find((n) => n.name === "User")?.id;
+            const webAppJsonId = json.nodes.find((n) => n.name === "Web")?.id;
+
+            expect(userJsonId).toBeDefined();
+            expect(webAppJsonId).toBeDefined();
+
+            expect(json.relations[0].sourceId).toBe(userJsonId!);
+            expect(json.relations[0].targetId).toBe(webAppJsonId!);
         });
     });
 });

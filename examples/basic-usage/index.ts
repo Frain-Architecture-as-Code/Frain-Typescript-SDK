@@ -83,7 +83,7 @@ async function main() {
 
     apiView.addNodes([paypal, webapp]);
 
-    frain.deploy();
+    await frain.build();
 }
 
 await main();

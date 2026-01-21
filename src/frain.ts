@@ -40,7 +40,7 @@ export class Frain {
     }
 
     private async writePayload(result: any) {
-        await Bun.write(import.meta.path, JSON.stringify(result, null, 4));
+        await Bun.write("output.json", JSON.stringify(result, null, 4));
     }
 
     public createContextView(): ContextView {
@@ -68,16 +68,18 @@ export class Frain {
         return this.views;
     }
 
-    public build() {
-        return {
+    public async build() {
+        const payload = {
             title: this.title,
             description: this.description,
             views: this.views.map((view) => view.toJson()),
         };
+        await this.writePayload(payload);
+        return payload;
     }
 
     public async deploy() {
-        const payload = this.build();
+        const payload = await this.build();
         const url = this.getUrl();
 
         const result = await axios.put(`${url}/deploy`, payload, {
@@ -90,7 +92,6 @@ export class Frain {
 
         if (result.status === 200) {
             console.log("🚀 Deployment successful");
-            await this.writePayload(payload);
         } else {
             console.error(`❌ Deployment failed with status ${result.status}`);
         }

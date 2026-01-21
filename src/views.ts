@@ -24,18 +24,35 @@ export abstract class View {
         return this.nodes;
     }
 
-    protected getRelationsJSON(): FrainRelationJSON[] {
-        const nodeIds = new Set(this.nodes.map((node) => node.getId()));
+    protected processNodesAndRelations(): {
+        nodes: FrainNodeJSON[];
+        relations: FrainRelationJSON[];
+        idMap: Map<string, string>;
+    } {
+        const idMap = new Map<string, string>();
+        for (const node of this.nodes) {
+            idMap.set(node.getId(), crypto.randomUUID());
+        }
+
+        const nodes = this.nodes.map((node) => {
+            const json = node.toJson();
+            json.id = idMap.get(node.getId())!;
+            return json;
+        });
+
         const relations: FrainRelationJSON[] = [];
 
         for (const node of this.nodes) {
             for (const relation of node.getRelations()) {
-                if (nodeIds.has(relation.getTargetId())) {
-                    relations.push(relation.toJson());
+                if (idMap.has(relation.getTargetId())) {
+                    const json = relation.toJson();
+                    json.sourceId = idMap.get(node.getId())!;
+                    json.targetId = idMap.get(relation.getTargetId())!;
+                    relations.push(json);
                 }
             }
         }
-        return relations;
+        return { nodes, relations, idMap };
     }
 
     abstract toJson(): FrainViewJSON;

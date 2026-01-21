@@ -26,13 +26,14 @@ export class ContainerView extends View {
 
     override toJson(): FrainViewJSON {
         const { name: systemName, id } = this.system.toJson();
+        const { nodes, relations, idMap } = this.processNodesAndRelations();
 
         return {
             type: this.type,
-            mainNodeId: id,
+            mainNodeId: idMap.get(id) ?? id,
             name: systemName,
-            nodes: this.nodes.map((node) => node.toJson()),
-            relations: this.getRelationsJSON(),
+            nodes,
+            relations,
         };
     }
 }
