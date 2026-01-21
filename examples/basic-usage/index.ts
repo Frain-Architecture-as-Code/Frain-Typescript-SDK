@@ -1,7 +1,7 @@
-import { Frain } from "../src/frain";
-import { NodeType } from "../src/types";
+import { Frain } from "../../src/frain";
+import { NodeType } from "../../src/types";
 
-function main() {
+async function main() {
     const frain = new Frain({
         apiKey: "asdasd",
         projectId: "asdasd",
@@ -82,6 +82,14 @@ function main() {
     webapp.use(payments, "uses", "As payment gateway");
 
     apiView.addNodes([paypal, webapp]);
+
+    const result = frain.build();
+    console.log(result);
+
+    await Bun.write(
+        "./examples/basic-usage/output.json",
+        JSON.stringify(result, null, 4),
+    );
 }
 
-main();
+await main();

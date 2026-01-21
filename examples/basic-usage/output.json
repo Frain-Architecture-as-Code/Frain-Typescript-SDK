@@ -1,0 +1,111 @@
+{
+    "title": "ACME",
+    "description": "This is a sample application",
+    "views": [
+        {
+            "type": "CONTEXT",
+            "mainNodeId": "",
+            "name": "",
+            "nodes": [
+                {
+                    "id": "3b683592-273c-49c3-b99c-3fa39a7785ce",
+                    "type": "PERSON",
+                    "name": "John Doe",
+                    "description": "A person",
+                    "technology": "Person"
+                },
+                {
+                    "id": "32d9b271-4657-48e8-a9d5-63b65227e59c",
+                    "type": "SYSTEM",
+                    "name": "Frain",
+                    "description": "A system",
+                    "technology": "System"
+                },
+                {
+                    "id": "c5b5ee0e-d706-4788-88d9-a6c01645f38f",
+                    "type": "EXTERNAL_SYSTEM",
+                    "name": "Paypal",
+                    "description": "An external system",
+                    "technology": "ExternalSystem"
+                }
+            ]
+        },
+        {
+            "type": "CONTAINER",
+            "mainNodeId": "32d9b271-4657-48e8-a9d5-63b65227e59c",
+            "name": "Frain",
+            "nodes": [
+                {
+                    "id": "9257554b-f831-4b62-bf92-e7ce0096d161",
+                    "type": "CONTAINER",
+                    "name": "Web App",
+                    "description": "A web application",
+                    "technology": "Next Js"
+                },
+                {
+                    "id": "4ea48ea8-e6d8-438b-8d3c-72101457eefc",
+                    "type": "CONTAINER",
+                    "name": "API",
+                    "description": "A Restfull API",
+                    "technology": "Spring Boot - Java 25"
+                },
+                {
+                    "id": "e286cb54-6bda-4304-a206-78bc04fc6482",
+                    "type": "DATABASE",
+                    "name": "Database",
+                    "description": "A database",
+                    "technology": "PostgreSQL"
+                },
+                {
+                    "id": "3b683592-273c-49c3-b99c-3fa39a7785ce",
+                    "type": "PERSON",
+                    "name": "John Doe",
+                    "description": "A person",
+                    "technology": "Person"
+                },
+                {
+                    "id": "c5b5ee0e-d706-4788-88d9-a6c01645f38f",
+                    "type": "EXTERNAL_SYSTEM",
+                    "name": "Paypal",
+                    "description": "An external system",
+                    "technology": "ExternalSystem"
+                }
+            ]
+        },
+        {
+            "type": "COMPONENT",
+            "name": "API",
+            "mainNodeId": "4ea48ea8-e6d8-438b-8d3c-72101457eefc",
+            "nodes": [
+                {
+                    "id": "fd252bd6-b3b1-4615-abe0-deb5610082c3",
+                    "type": "COMPONENT",
+                    "name": "Shared Kernel",
+                    "description": "A shared kernel",
+                    "technology": "Spring Boot - Java 25"
+                },
+                {
+                    "id": "b2ae2fe1-51fe-428b-b920-4daff3fee2d7",
+                    "type": "COMPONENT",
+                    "name": "Payments",
+                    "description": "A payments component",
+                    "technology": "Spring Boot - Java 25"
+                },
+                {
+                    "id": "c5b5ee0e-d706-4788-88d9-a6c01645f38f",
+                    "type": "EXTERNAL_SYSTEM",
+                    "name": "Paypal",
+                    "description": "An external system",
+                    "technology": "ExternalSystem"
+                },
+                {
+                    "id": "9257554b-f831-4b62-bf92-e7ce0096d161",
+                    "type": "CONTAINER",
+                    "name": "Web App",
+                    "description": "A web application",
+                    "technology": "Next Js"
+                }
+            ]
+        }
+    ]
+}
