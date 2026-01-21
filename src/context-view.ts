@@ -1,5 +1,5 @@
 import { ExternalSystem, Person, System } from "./frain-nodes";
-import { ViewType } from "./types";
+import { ViewType, type FrainViewJSON } from "./types";
 import { View } from "./views";
 
 export class ContextView extends View {
@@ -43,5 +43,12 @@ export class ContextView extends View {
         return externalSystem;
     }
 
-    override toJson() {}
+    override toJson(): FrainViewJSON {
+        return {
+            type: this.type,
+            mainNodeId: "",
+            name: "",
+            nodes: this.nodes.map((node) => node.toJson()),
+        };
+    }
 }

@@ -1,5 +1,5 @@
 import { Component, Container } from "./frain-nodes";
-import { ViewType } from "./types";
+import { ViewType, type FrainViewJSON } from "./types";
 import { View } from "./views";
 
 export class ComponentView extends View {
@@ -24,5 +24,14 @@ export class ComponentView extends View {
         return component;
     }
 
-    override toJson() {}
+    override toJson(): FrainViewJSON {
+        const { name: componentName, id } = this.container.toJson();
+
+        return {
+            type: this.type,
+            name: componentName,
+            mainNodeId: id,
+            nodes: this.nodes.map((node) => node.toJson()),
+        };
+    }
 }

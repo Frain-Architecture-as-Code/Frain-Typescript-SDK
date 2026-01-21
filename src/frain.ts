@@ -47,4 +47,16 @@ export class Frain {
     public getViews(): View[] {
         return this.views;
     }
+
+    public build() {
+        return {
+            title: this.title,
+            description: this.description,
+            views: this.views.map((view) => view.toJson()),
+        };
+    }
+
+    public deploy() {
+        // Implement deployment logic here
+    }
 }

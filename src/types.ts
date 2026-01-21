@@ -21,3 +21,18 @@ export enum NodeType {
     Container = "CONTAINER",
     Component = "COMPONENT",
 }
+
+export interface FrainNodeJSON {
+    id: string;
+    type: NodeType;
+    name: string;
+    description: string;
+    technology: string;
+}
+
+export interface FrainViewJSON {
+    type: ViewType;
+    mainNodeId: string;
+    name: string;
+    nodes: FrainNodeJSON[];
+}

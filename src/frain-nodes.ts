@@ -1,5 +1,5 @@
 import { FrainRelation } from "./frain-relation";
-import { NodeType } from "./types";
+import { NodeType, type FrainNodeJSON } from "./types";
 
 export abstract class FrainNode {
     private id: string;
@@ -47,9 +47,10 @@ export abstract class FrainNode {
     public getId(): string {
         return this.id;
     }
-    public toJson(): any {
+    public toJson(): FrainNodeJSON {
         return {
             id: this.id,
+            type: this.type,
             name: this.name,
             description: this.description,
             technology: this.technology,
