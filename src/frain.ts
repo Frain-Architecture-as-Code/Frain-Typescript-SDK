@@ -44,11 +44,7 @@ export class Frain {
         return componentView;
     }
 
-    public build() {
-        // TODO: Implement build method
-    }
-
-    public deploy() {
-        // TODO: Implement deploy method
+    public getViews(): View[] {
+        return this.views;
     }
 }

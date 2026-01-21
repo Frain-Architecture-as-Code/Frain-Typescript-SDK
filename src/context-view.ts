@@ -1,9 +1,10 @@
 import { ExternalSystem, Person, System } from "./frain-nodes";
+import { ViewType } from "./types";
 import { View } from "./views";
 
 export class ContextView extends View {
     constructor() {
-        super();
+        super(ViewType.Context);
     }
 
     public addPerson({
@@ -41,4 +42,6 @@ export class ContextView extends View {
         this.addNode(externalSystem);
         return externalSystem;
     }
+
+    override toJson() {}
 }

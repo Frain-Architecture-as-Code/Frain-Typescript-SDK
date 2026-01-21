@@ -1,4 +1,5 @@
 import { Frain } from "../src/frain";
+import { NodeType } from "../src/types";
 
 function main() {
     const frain = new Frain({
@@ -50,14 +51,37 @@ function main() {
     });
 
     webapp.use(api, "uses", "As API");
-    webapp.use(db, "uses", "As database");
+    api.use(db, "uses", "As database");
+    api.use(paypal, "uses", "As payment gateway");
 
     commonPerson.use(webapp, "uses", "");
 
+    // Styling
+    db.setType(NodeType.Database);
+
+    container.addNodes([commonPerson, paypal]);
+
     // Create a Component view
     const apiView = frain.createComponentView(api);
-    
-    
+
+    const sharedKernel = apiView.addComponent({
+        name: "Shared Kernel",
+        description: "A shared kernel",
+        technology: "Spring Boot - Java 25",
+    });
+
+    const payments = apiView.addComponent({
+        name: "Payments",
+        description: "A payments component",
+        technology: "Spring Boot - Java 25",
+    });
+
+    payments.use(paypal, "uses", "As payment gateway");
+    payments.use(sharedKernel, "uses", "As shared kernel");
+
+    webapp.use(payments, "uses", "As payment gateway");
+
+    apiView.addNodes([paypal, webapp]);
 }
 
 main();

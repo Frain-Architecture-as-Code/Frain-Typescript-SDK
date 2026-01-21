@@ -1,7 +1,9 @@
 import { FrainRelation } from "./frain-relation";
+import { NodeType } from "./types";
 
 export abstract class FrainNode {
     private id: string;
+    private type: NodeType; // This property is for styling.
 
     private name: string;
     private description: string;
@@ -9,11 +11,17 @@ export abstract class FrainNode {
 
     private relations: FrainRelation[];
 
-    constructor(name: string, description: string, technology: string) {
+    constructor(
+        name: string,
+        description: string,
+        technology: string,
+        type: NodeType,
+    ) {
         this.id = crypto.randomUUID();
         this.name = name;
         this.description = description;
         this.technology = technology;
+        this.type = type;
 
         this.relations = [];
     }
@@ -32,34 +40,52 @@ export abstract class FrainNode {
         this.relations.push(relation);
         return relation;
     }
+
+    public getRelations(): FrainRelation[] {
+        return this.relations;
+    }
+    public getId(): string {
+        return this.id;
+    }
+    public toJson(): any {
+        return {
+            id: this.id,
+            name: this.name,
+            description: this.description,
+            technology: this.technology,
+        };
+    }
+    public setType(type: NodeType): void {
+        this.type = type;
+    }
 }
 
 export class Person extends FrainNode {
     constructor(name: string, description: string) {
-        super(name, description, "Person");
+        super(name, description, "Person", NodeType.Person);
     }
 }
 
 export class System extends FrainNode {
     constructor(name: string, description: string) {
-        super(name, description, "System");
+        super(name, description, "System", NodeType.System);
     }
 }
 
 export class ExternalSystem extends FrainNode {
     constructor(name: string, description: string) {
-        super(name, description, "ExternalSystem");
+        super(name, description, "ExternalSystem", NodeType.ExternalSystem);
     }
 }
 
 export class Container extends FrainNode {
     constructor(name: string, description: string, technology: string) {
-        super(name, description, technology);
+        super(name, description, technology, NodeType.Container);
     }
 }
 
 export class Component extends FrainNode {
     constructor(name: string, description: string, technology: string) {
-        super(name, description, technology);
+        super(name, description, technology, NodeType.Component);
     }
 }

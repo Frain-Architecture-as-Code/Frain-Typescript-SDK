@@ -1,14 +1,16 @@
 import { Component, Container } from "./frain-nodes";
+import { ViewType } from "./types";
 import { View } from "./views";
 
 export class ComponentView extends View {
     private container: Container;
+
     constructor(container: Container) {
-        super();
+        super(ViewType.Component);
         this.container = container;
     }
 
-    private addComponent({
+    public addComponent({
         name,
         description,
         technology,
@@ -21,4 +23,6 @@ export class ComponentView extends View {
         this.addNode(component);
         return component;
     }
+
+    override toJson() {}
 }

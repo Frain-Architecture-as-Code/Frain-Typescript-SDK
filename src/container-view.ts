@@ -1,11 +1,12 @@
 import { Container, type System } from "./frain-nodes";
+import { ViewType } from "./types";
 import { View } from "./views";
 
 export class ContainerView extends View {
     private system: System;
 
     constructor(system: System) {
-        super();
+        super(ViewType.Container);
         this.system = system;
     }
 
@@ -21,5 +22,9 @@ export class ContainerView extends View {
         const container = new Container(name, description, technology);
         this.addNode(container);
         return container;
+    }
+
+    override toJson() {
+        return {};
     }
 }
