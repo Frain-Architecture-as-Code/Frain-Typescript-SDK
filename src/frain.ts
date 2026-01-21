@@ -1,10 +1,11 @@
-import type z from "zod";
+import z from "zod";
 import { ComponentView } from "./component-view";
 import { ContainerView } from "./container-view";
 import { ContextView } from "./context-view";
 import type { Component, System } from "./frain-nodes";
 import { frainConfigSchema } from "./validators";
 import type { View } from "./views";
+import axios from "axios";
 
 export class Frain {
     private projectId: string;
@@ -24,6 +25,22 @@ export class Frain {
         this.title = validated.title;
 
         this.views = [];
+    }
+
+    private getUrl() {
+        const envVariable = process.env.FRAIN_API_URL;
+        if (!envVariable) {
+            throw new Error("FRAIN_API_URL environment variable is not set");
+        }
+        const result = z.url().safeParse(envVariable);
+        if (!result.success) {
+            throw new Error(`Invalid URL: ${result.error}`);
+        }
+        return result.data;
+    }
+
+    private async writePayload(result: any) {
+        await Bun.write(import.meta.path, JSON.stringify(result, null, 4));
     }
 
     public createContextView(): ContextView {
@@ -59,7 +76,25 @@ export class Frain {
         };
     }
 
-    public deploy() {
-        // Implement deployment logic here
+    public async deploy() {
+        const payload = this.build();
+        const url = this.getUrl();
+
+        const result = await axios.put(`${url}/deploy`, payload, {
+            headers: {
+                "X-Frain-Api-Key": this.apiKey,
+                "Content-Type": "application/json",
+                "X-Frain-Project-Id": this.projectId,
+            },
+        });
+
+        if (result.status === 200) {
+            console.log("🚀 Deployment successful");
+            await this.writePayload(payload);
+        } else {
+            console.error(`❌ Deployment failed with status ${result.status}`);
+        }
+
+        return result;
     }
 }

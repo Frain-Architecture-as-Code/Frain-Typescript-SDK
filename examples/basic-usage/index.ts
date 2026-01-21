@@ -83,13 +83,7 @@ async function main() {
 
     apiView.addNodes([paypal, webapp]);
 
-    const result = frain.build();
-    console.log(result);
-
-    await Bun.write(
-        "./examples/basic-usage/output.json",
-        JSON.stringify(result, null, 4),
-    );
+    frain.deploy();
 }
 
 await main();
