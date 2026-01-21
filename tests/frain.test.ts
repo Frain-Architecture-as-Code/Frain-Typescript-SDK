@@ -8,7 +8,7 @@ describe("Frain SDK Generation", () => {
         // Setup
         const frain = new Frain({
             apiKey: "test-api-key",
-            projectId: "test-project-id",
+            projectId: "123e4567-e89b-12d3-a456-426614174000",
             title: "Test Architecture",
             description: "Testing the Frain SDK",
         });
