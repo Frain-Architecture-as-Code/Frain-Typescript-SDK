@@ -1,5 +1,10 @@
 import type { FrainNode } from "./frain-nodes";
-import type { FrainRelationJSON, FrainViewJSON, ViewType } from "./types";
+import type {
+    FrainNodeJSON,
+    FrainRelationJSON,
+    FrainViewJSON,
+    ViewType,
+} from "./types";
 import { viewTypeSchema } from "./validators";
 
 export abstract class View {

@@ -81,8 +81,9 @@ export class Frain {
     public async deploy() {
         const payload = await this.build();
         const url = this.getUrl();
+        const parsedUrl = `${url}/api/v1/c4/deployments`;
 
-        const result = await axios.put(`${url}/deploy`, payload, {
+        const result = await axios.put(parsedUrl, payload, {
             headers: {
                 "X-Frain-Api-Key": this.apiKey,
                 "Content-Type": "application/json",
