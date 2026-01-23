@@ -1,6 +1,6 @@
 import { Component, Container } from "./frain-nodes";
 import { ViewType, type FrainViewJSON } from "./types";
-import { View } from "./views";
+import { View } from "./view";
 
 export class ComponentView extends View {
     private container: Container;

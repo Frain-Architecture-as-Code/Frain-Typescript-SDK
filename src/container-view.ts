@@ -1,6 +1,6 @@
 import { Container, type System } from "./frain-nodes";
 import { ViewType, type FrainViewJSON } from "./types";
-import { View } from "./views";
+import { View } from "./view";
 
 export class ContainerView extends View {
     private system: System;

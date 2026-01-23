@@ -4,7 +4,7 @@ import { ContainerView } from "./container-view";
 import { ContextView } from "./context-view";
 import type { Component, System } from "./frain-nodes";
 import { frainConfigSchema } from "./validators";
-import type { View } from "./views";
+import type { View } from "./view";
 import axios from "axios";
 
 export class Frain {

@@ -1,6 +1,6 @@
 import { ExternalSystem, Person, System } from "./frain-nodes";
 import { ViewType, type FrainViewJSON } from "./types";
-import { View } from "./views";
+import { View } from "./view";
 
 export class ContextView extends View {
     constructor() {
