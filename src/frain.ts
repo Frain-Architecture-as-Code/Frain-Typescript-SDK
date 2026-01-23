@@ -46,21 +46,23 @@ export class Frain {
     public createContextView(): ContextView {
         const context = new ContextView();
         this.views.push(context);
-
         return context;
     }
 
     public createContainerView(system: System): ContainerView {
-        const container = new ContainerView(system);
-        this.views.push(container);
+        const containerView = new ContainerView(system);
+        this.views.push(containerView);
 
-        return container;
+        system.setViewId(containerView.getId());
+
+        return containerView;
     }
 
     public createComponentView(component: Component): ComponentView {
         const componentView = new ComponentView(component);
         this.views.push(componentView);
 
+        component.setViewId(componentView.getId());
         return componentView;
     }
 
@@ -69,12 +71,14 @@ export class Frain {
     }
 
     public async build() {
+        console.log("Building...");
         const payload = {
             title: this.title,
             description: this.description,
             views: this.views.map((view) => view.toJson()),
         };
         await this.writePayload(payload);
+        console.log("✅ Build completed");
         return payload;
     }
 

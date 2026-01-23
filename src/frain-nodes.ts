@@ -9,6 +9,7 @@ export abstract class FrainNode {
     private name: string;
     private description: string;
     private technology: string;
+    private viewId: string | null;
 
     private relations: FrainRelation[];
 
@@ -30,6 +31,7 @@ export abstract class FrainNode {
         this.description = description;
         this.technology = technology;
         this.type = type;
+        this.viewId = null;
 
         this.relations = [];
     }
@@ -62,11 +64,15 @@ export abstract class FrainNode {
             name: this.name,
             description: this.description,
             technology: this.technology,
+            viewId: this.viewId,
         };
     }
     public setType(type: NodeType): void {
         nodeTypeSchema.parse(type);
         this.type = type;
+    }
+    public setViewId(viewId: string): void {
+        this.viewId = viewId;
     }
 }
 

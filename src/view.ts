@@ -8,6 +8,8 @@ import type {
 import { viewTypeSchema } from "./validators";
 
 export abstract class View {
+    protected id: string;
+
     protected nodes: FrainNode[];
     protected externalNodes: FrainNode[];
     protected type: ViewType;
@@ -17,6 +19,7 @@ export abstract class View {
         this.nodes = [];
         this.externalNodes = [];
         this.type = type;
+        this.id = crypto.randomUUID();
     }
 
     protected addNode(element: FrainNode): void {
@@ -37,6 +40,10 @@ export abstract class View {
 
     public getExternalNodes(): FrainNode[] {
         return this.externalNodes;
+    }
+
+    public getId(): string {
+        return this.id;
     }
 
     protected processNodesAndRelations(): {

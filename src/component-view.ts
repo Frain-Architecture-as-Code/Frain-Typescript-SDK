@@ -30,6 +30,7 @@ export class ComponentView extends View {
             this.processNodesAndRelations();
 
         return {
+            id: this.id,
             type: this.type,
             container: {
                 name,

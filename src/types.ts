@@ -28,6 +28,7 @@ export interface FrainNodeJSON {
     name: string;
     description: string;
     technology: string;
+    viewId: string | null;
 }
 
 export interface FrainRelationJSON {
@@ -38,6 +39,7 @@ export interface FrainRelationJSON {
 }
 
 export interface FrainViewJSON {
+    id: string;
     type: ViewType;
     container?: {
         name: string;
