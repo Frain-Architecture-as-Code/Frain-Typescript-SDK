@@ -11,7 +11,7 @@ import { NodeType } from "../src/types";
 
 describe("Frain SDK Tests", () => {
     describe("Frain Class", () => {
-        test("should initialize with valid config", () => {
+        test("should initialize with valid config", async () => {
             const frain = new Frain({
                 projectId: "123e4567-e89b-12d3-a456-426614174000",
                 apiKey: "secret-key",
@@ -20,7 +20,7 @@ describe("Frain SDK Tests", () => {
             });
             expect(frain).toBeDefined();
             expect(frain.getViews()).toBeEmpty();
-            const build = frain.build();
+            const build = await frain.build();
             expect(build.title).toBe("My Project");
             expect(build.description).toBe("Project Description");
         });
@@ -171,7 +171,11 @@ describe("Frain SDK Tests", () => {
             expect(view.getNodes()).toHaveLength(1);
 
             const json = view.toJson();
-            expect(json.mainNodeId).toBe(sys.getId());
+            expect(json.container).toEqual({
+                name: "S",
+                description: "D",
+                technology: "System",
+            });
         });
 
         test("ComponentView should add components", () => {
@@ -192,7 +196,11 @@ describe("Frain SDK Tests", () => {
             expect(view.getNodes()).toHaveLength(1);
 
             const json = view.toJson();
-            expect(json.mainNodeId).toBe(cont.getId());
+            expect(json.container).toEqual({
+                name: "C",
+                description: "D",
+                technology: "T",
+            });
         });
 
         test("should only include relations where target is in view", () => {

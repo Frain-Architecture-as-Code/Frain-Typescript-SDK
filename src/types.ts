@@ -39,7 +39,11 @@ export interface FrainRelationJSON {
 
 export interface FrainViewJSON {
     type: ViewType;
-    mainNodeId: string;
+    container?: {
+        name: string;
+        description: string;
+        technology: string;
+    };
     name: string;
     nodes: FrainNodeJSON[];
     relations: FrainRelationJSON[];

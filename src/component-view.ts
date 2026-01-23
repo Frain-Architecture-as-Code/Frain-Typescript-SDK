@@ -25,13 +25,17 @@ export class ComponentView extends View {
     }
 
     override toJson(): FrainViewJSON {
-        const { name: componentName, id } = this.container.toJson();
-        const { nodes, relations, idMap } = this.processNodesAndRelations();
+        const { name, description, technology } = this.container.toJson();
+        const { nodes, relations } = this.processNodesAndRelations();
 
         return {
             type: this.type,
-            name: componentName,
-            mainNodeId: idMap.get(id) ?? id,
+            container: {
+                name,
+                description,
+                technology,
+            },
+            name,
             nodes,
             relations,
         };

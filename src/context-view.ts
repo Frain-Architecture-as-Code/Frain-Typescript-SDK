@@ -47,7 +47,6 @@ export class ContextView extends View {
         const { nodes, relations } = this.processNodesAndRelations();
         return {
             type: this.type,
-            mainNodeId: "",
             name: "",
             nodes,
             relations,

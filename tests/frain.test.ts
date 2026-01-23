@@ -4,7 +4,7 @@ import { NodeType } from "../src/types";
 import { frainOutputSchema } from "../src/validators";
 
 describe("Frain SDK Generation", () => {
-    test("should generate a valid JSON structure with relations", () => {
+    test("should generate a valid JSON structure with relations", async () => {
         // Setup
         const frain = new Frain({
             apiKey: "test-api-key",
@@ -62,20 +62,20 @@ describe("Frain SDK Generation", () => {
         webApp.use(api, "API Calls", "HTTPS");
         api.use(db, "Reads/Writes", "TCP");
         api.use(external, "Syncs with", "REST");
-        
+
         // Add external nodes to view to make relations visible
         containerView.addNodes([user, external]);
         user.use(webApp, "Visits", "Browser");
 
         // Component View
         const componentView = frain.createComponentView(api);
-        
+
         const controller = componentView.addComponent({
             name: "UserController",
             description: "Handles user requests",
             technology: "Express",
         });
-        
+
         const service = componentView.addComponent({
             name: "UserService",
             description: "Business logic",
@@ -83,34 +83,37 @@ describe("Frain SDK Generation", () => {
         });
 
         controller.use(service, "Delegates to", "Method Call");
-        
+
         // Build
-        const result = frain.build();
+        const result = await frain.build();
 
         // Validation
         const validationResult = frainOutputSchema.safeParse(result);
 
         if (!validationResult.success) {
-            console.error("Validation Error:", JSON.stringify(validationResult.error.format(), null, 2));
+            console.error(
+                "Validation Error:",
+                JSON.stringify(validationResult.error.format(), null, 2),
+            );
         }
 
         expect(validationResult.success).toBe(true);
         if (validationResult.success) {
-             const data = validationResult.data;
-             expect(data.title).toBe("Test Architecture");
-             expect(data.views).toHaveLength(3);
-             
-             // Check Context View Relations
-             const contextView = data.views.find(v => v.type === "CONTEXT");
-             expect(contextView).toBeDefined();
-             // User -> System, System -> External
-             expect(contextView?.relations).toHaveLength(2);
+            const data = validationResult.data;
+            expect(data.title).toBe("Test Architecture");
+            expect(data.views).toHaveLength(3);
 
-             // Check Container View Relations
-             const contView = data.views.find(v => v.type === "CONTAINER");
-             expect(contView).toBeDefined();
-             // WebApp -> API, API -> DB, API -> External, User -> WebApp
-             expect(contView?.relations).toHaveLength(4);
+            // Check Context View Relations
+            const contextView = data.views.find((v) => v.type === "CONTEXT");
+            expect(contextView).toBeDefined();
+            // User -> System, System -> External
+            expect(contextView?.relations).toHaveLength(2);
+
+            // Check Container View Relations
+            const contView = data.views.find((v) => v.type === "CONTAINER");
+            expect(contView).toBeDefined();
+            // WebApp -> API, API -> DB, API -> External, User -> WebApp
+            expect(contView?.relations).toHaveLength(4);
         }
     });
 });

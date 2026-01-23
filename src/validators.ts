@@ -69,7 +69,13 @@ export const viewTypeSchema = z.enum(ViewType);
  */
 export const frainViewSchema = z.object({
     type: viewTypeSchema,
-    mainNodeId: z.string(), // Can be empty string or UUID, so just string is safer based on previous code
+    container: z
+        .object({
+            name: z.string(),
+            description: z.string(),
+            technology: z.string(),
+        })
+        .optional(),
     name: z.string(),
     nodes: z.array(frainNodeSchema),
     relations: z.array(frainRelationSchema),
