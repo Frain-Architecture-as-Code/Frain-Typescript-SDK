@@ -78,6 +78,7 @@ export const frainViewSchema = z.object({
         .optional(),
     name: z.string(),
     nodes: z.array(frainNodeSchema),
+    externalNodes: z.array(frainNodeSchema),
     relations: z.array(frainRelationSchema),
 });
 

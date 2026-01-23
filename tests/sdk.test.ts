@@ -230,7 +230,9 @@ describe("Frain SDK Tests", () => {
             expect(json.relations).toHaveLength(1);
 
             // Find the ID of S1 in the generated JSON
-            const s1JsonId = json.nodes.find((n) => n.name === "S1")?.id;
+            const s1JsonId = [...json.nodes, ...json.externalNodes].find(
+                (n) => n.name === "S1",
+            )?.id;
             expect(s1JsonId).toBeDefined();
             expect(json.relations[0].targetId).toBe(s1JsonId!);
         });
@@ -265,8 +267,12 @@ describe("Frain SDK Tests", () => {
             const json = view.toJson();
             expect(json.relations).toHaveLength(1);
 
-            const userJsonId = json.nodes.find((n) => n.name === "User")?.id;
-            const webAppJsonId = json.nodes.find((n) => n.name === "Web")?.id;
+            const userJsonId = [...json.nodes, ...json.externalNodes].find(
+                (n) => n.name === "User",
+            )?.id;
+            const webAppJsonId = [...json.nodes, ...json.externalNodes].find(
+                (n) => n.name === "Web",
+            )?.id;
 
             expect(userJsonId).toBeDefined();
             expect(webAppJsonId).toBeDefined();

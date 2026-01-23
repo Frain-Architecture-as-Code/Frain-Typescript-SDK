@@ -26,7 +26,8 @@ export class ContainerView extends View {
 
     override toJson(): FrainViewJSON {
         const { name, description, technology } = this.system.toJson();
-        const { nodes, relations } = this.processNodesAndRelations();
+        const { nodes, externalNodes, relations } =
+            this.processNodesAndRelations();
 
         return {
             type: this.type,
@@ -37,6 +38,7 @@ export class ContainerView extends View {
             },
             name,
             nodes,
+            externalNodes,
             relations,
         };
     }

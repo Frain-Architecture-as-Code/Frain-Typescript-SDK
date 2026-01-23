@@ -3,8 +3,8 @@ import { NodeType } from "../../src/types";
 
 async function main() {
     const frain = new Frain({
-        apiKey: "frain_live_JFk-8F2LdzKuspSD9JIhwI02iCLuOgrLCXAr1iigRYA",
-        projectId: "d5c222db-636a-4c08-b516-cc148c880e16",
+        apiKey: "frain_live_UjDsoBQbWfvYN1iukylNGCvAHmNHpb0oP136M3zA6Fs",
+        projectId: "9269938d-4fc9-437c-a3c9-5c4d66109522",
         title: "ACME",
         description: "This is a sample application",
     });
@@ -83,7 +83,7 @@ async function main() {
 
     apiView.addNodes([paypal, webapp]);
 
-    await frain.build();
+    await frain.deploy();
 }
 
 await main();

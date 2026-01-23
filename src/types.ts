@@ -46,5 +46,6 @@ export interface FrainViewJSON {
     };
     name: string;
     nodes: FrainNodeJSON[];
+    externalNodes: FrainNodeJSON[];
     relations: FrainRelationJSON[];
 }

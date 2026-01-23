@@ -9,11 +9,13 @@ import { viewTypeSchema } from "./validators";
 
 export abstract class View {
     protected nodes: FrainNode[];
+    protected externalNodes: FrainNode[];
     protected type: ViewType;
 
     constructor(type: ViewType) {
         viewTypeSchema.parse(type);
         this.nodes = [];
+        this.externalNodes = [];
         this.type = type;
     }
 
@@ -22,20 +24,31 @@ export abstract class View {
     }
 
     public addNodes(nodes: FrainNode[]): void {
-        this.nodes.push(...nodes);
+        this.externalNodes.push(...nodes);
     }
 
     public getNodes(): FrainNode[] {
+        return [...this.nodes, ...this.externalNodes];
+    }
+
+    public getInternalNodes(): FrainNode[] {
         return this.nodes;
+    }
+
+    public getExternalNodes(): FrainNode[] {
+        return this.externalNodes;
     }
 
     protected processNodesAndRelations(): {
         nodes: FrainNodeJSON[];
+        externalNodes: FrainNodeJSON[];
         relations: FrainRelationJSON[];
         idMap: Map<string, string>;
     } {
         const idMap = new Map<string, string>();
-        for (const node of this.nodes) {
+        const allNodes = [...this.nodes, ...this.externalNodes];
+
+        for (const node of allNodes) {
             idMap.set(node.getId(), crypto.randomUUID());
         }
 
@@ -45,9 +58,15 @@ export abstract class View {
             return json;
         });
 
+        const externalNodes = this.externalNodes.map((node) => {
+            const json = node.toJson();
+            json.id = idMap.get(node.getId())!;
+            return json;
+        });
+
         const relations: FrainRelationJSON[] = [];
 
-        for (const node of this.nodes) {
+        for (const node of allNodes) {
             for (const relation of node.getRelations()) {
                 if (idMap.has(relation.getTargetId())) {
                     const json = relation.toJson();
@@ -57,7 +76,7 @@ export abstract class View {
                 }
             }
         }
-        return { nodes, relations, idMap };
+        return { nodes, externalNodes, relations, idMap };
     }
 
     abstract toJson(): FrainViewJSON;

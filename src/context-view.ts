@@ -44,11 +44,13 @@ export class ContextView extends View {
     }
 
     override toJson(): FrainViewJSON {
-        const { nodes, relations } = this.processNodesAndRelations();
+        const { nodes, externalNodes, relations } =
+            this.processNodesAndRelations();
         return {
             type: this.type,
             name: "",
             nodes,
+            externalNodes,
             relations,
         };
     }
