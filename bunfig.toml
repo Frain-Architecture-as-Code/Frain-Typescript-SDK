@@ -1,0 +1,7 @@
+[test]
+# test match pattern
+coverage = false
+
+[install]
+# install exact versions
+exact = false
