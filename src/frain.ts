@@ -72,12 +72,16 @@ export class Frain {
 
     public async build() {
         console.log("Building...");
+
         const payload = {
             title: this.title,
             description: this.description,
+            updatedAt: new Date(),
             views: this.views.map((view) => view.toJson()),
         };
+
         await this.writePayload(payload);
+
         console.log("✅ Build completed");
         return payload;
     }

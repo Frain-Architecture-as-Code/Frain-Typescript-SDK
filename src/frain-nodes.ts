@@ -65,6 +65,8 @@ export abstract class FrainNode {
             description: this.description,
             technology: this.technology,
             viewId: this.viewId,
+            x: 0,
+            y: 0,
         };
     }
     public setType(type: NodeType): void {

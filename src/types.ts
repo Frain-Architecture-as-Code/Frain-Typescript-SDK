@@ -29,6 +29,8 @@ export interface FrainNodeJSON {
     description: string;
     technology: string;
     viewId: string | null;
+    x: number;
+    y: number;
 }
 
 export interface FrainRelationJSON {
