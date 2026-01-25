@@ -1,18 +1,28 @@
 {
     "name": "frain-typescript-sdk",
-    "module": "index.ts",
+    "version": "0.0.1",
+    "module": "dist/index.js",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "exports": {
-        ".": "./index.ts"
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.js"
+        }
     },
+    "files": [
+        "dist"
+    ],
     "scripts": {
-        "test": "bun test"
+        "test": "bun test",
+        "build": "bun build ./index.ts --outdir ./dist --target node && tsc -p tsconfig.build.json"
     },
     "type": "module",
     "devDependencies": {
         "@types/bun": "latest"
     },
     "peerDependencies": {
-        "typescript": "^5"
+        "typescript": "^5.9.3"
     },
     "dependencies": {
         "axios": "^1.13.2",
