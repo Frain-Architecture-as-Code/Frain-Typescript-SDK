@@ -1,5 +1,5 @@
 {
-    "name": "frain-typescript-sdk",
+    "name": "@jonatanfd/frain-ts-sdk",
     "version": "0.0.2",
     "module": "dist/index.js",
     "main": "dist/index.js",
