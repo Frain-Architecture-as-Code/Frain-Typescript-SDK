@@ -3,8 +3,8 @@ import { NodeType } from "../../src/types";
 
 async function main() {
     const frain = new Frain({
-        apiKey: "frain_live_UjDsoBQbWfvYN1iukylNGCvAHmNHpb0oP136M3zA6Fs",
-        projectId: "9269938d-4fc9-437c-a3c9-5c4d66109522",
+        apiKey: "frain_8f5ad55a-7e37-48c2-a254-44ea8f604252",
+        projectId: "340e2b4a-49de-43c8-ae61-eb7822baf0c2",
         title: "ACME",
         description: "This is a sample application",
     });
