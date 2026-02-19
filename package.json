@@ -1,6 +1,6 @@
 {
-    "name": "frain-typescript-sdk",
-    "version": "0.0.2",
+    "name": "@jonatanfd/frain-ts-sdk",
+    "version": "0.0.3",
     "module": "dist/index.js",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -25,7 +25,10 @@
         "typescript": "^5.9.3"
     },
     "dependencies": {
-        "axios": "^1.13.2",
-        "zod": "^4.3.5"
+        "axios": "^1.13.5",
+        "zod": "^4.3.6"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
