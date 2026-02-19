@@ -40,7 +40,14 @@ export class Frain {
     }
 
     private async writePayload(result: any) {
-        await Bun.write("output.json", JSON.stringify(result, null, 4));
+        const content = JSON.stringify(result, null, 4);
+
+        if (typeof (globalThis as any).Bun !== "undefined") {
+            await (globalThis as any).Bun.write("output.json", content);
+        } else {
+            const { writeFile } = await import("fs/promises");
+            await writeFile("output.json", content, "utf-8");
+        }
     }
 
     public createContextView(): ContextView {
@@ -77,7 +84,11 @@ export class Frain {
             title: this.title,
             description: this.description,
             updatedAt: new Date(),
-            views: this.views.map((view) => view.toJson()),
+            views: this.views.map((view) => {
+                const viewJson = view.toJson();
+                console.log("Building: ", viewJson.name);
+                return viewJson;
+            }),
         };
 
         await this.writePayload(payload);
