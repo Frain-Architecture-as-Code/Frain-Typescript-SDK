@@ -86,7 +86,10 @@ export class Frain {
             updatedAt: new Date(),
             views: this.views.map((view) => {
                 const viewJson = view.toJson();
-                console.log("Building: ", viewJson.name);
+                console.log(
+                    "Building: ",
+                    viewJson.name ? viewJson.name : "Context View",
+                );
                 return viewJson;
             }),
         };
