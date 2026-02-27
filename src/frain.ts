@@ -10,6 +10,7 @@ import axios from "axios";
 export class Frain {
     private projectId: string;
     private apiKey: string;
+    private frainApiUrl: string;
 
     private title: string;
     private description: string;
@@ -23,20 +24,10 @@ export class Frain {
         this.apiKey = validated.apiKey;
         this.description = validated.description;
         this.title = validated.title;
+        this.frainApiUrl =
+            validated.frainApiUrl ?? "https://frain-api.vercel.app";
 
         this.views = [];
-    }
-
-    private getUrl() {
-        const envVariable = process.env.FRAIN_API_URL;
-        if (!envVariable) {
-            throw new Error("FRAIN_API_URL environment variable is not set");
-        }
-        const result = z.url().safeParse(envVariable);
-        if (!result.success) {
-            throw new Error(`Invalid URL: ${result.error}`);
-        }
-        return result.data;
     }
 
     private async writePayload(result: any) {
@@ -102,8 +93,10 @@ export class Frain {
 
     public async deploy() {
         const payload = await this.build();
-        const url = this.getUrl();
-        const parsedUrl = `${url}/api/v1/c4models/projects/${this.projectId}/sdk`;
+        const parsedUrl = `${this.frainApiUrl}/api/v1/c4models/projects/${this.projectId}/sdk`;
+
+        console.log("Deploying...");
+        console.log("Deploying to ", parsedUrl);
 
         const result = await axios.put(parsedUrl, payload, {
             headers: {

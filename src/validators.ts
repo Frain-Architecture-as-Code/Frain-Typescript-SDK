@@ -15,6 +15,7 @@ export const frainConfigSchema = z.object({
         .string()
         .min(1, { message: "Title cannot be empty" })
         .max(255, { message: "Title cannot exceed 255 characters" }),
+    frainApiUrl: z.url({ message: "Invalid URL" }).optional(),
 });
 
 /**
