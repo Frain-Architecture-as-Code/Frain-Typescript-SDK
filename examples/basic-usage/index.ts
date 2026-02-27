@@ -3,8 +3,9 @@ import { NodeType } from "../../src/types";
 
 async function main() {
     const frain = new Frain({
-        apiKey: "frain_8f5ad55a-7e37-48c2-a254-44ea8f604252",
-        projectId: "340e2b4a-49de-43c8-ae61-eb7822baf0c2",
+        apiKey: "frain_a500b623c9ce7eff083004fc68fdf5bd079e8f7d3f031f94fded902c97c69e4e",
+        projectId: "58e54d63-36a6-48f9-836a-95a49e7fc27c",
+        frainApiUrl: "https://frain-api.vercel.app", // By Default https://frain-api.vercel.app
         title: "ACME",
         description: "This is a sample application",
     });
