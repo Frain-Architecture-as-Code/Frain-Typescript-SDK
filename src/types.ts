@@ -53,3 +53,15 @@ export interface FrainViewJSON {
     externalNodes: FrainNodeJSON[];
     relations: FrainRelationJSON[];
 }
+
+export interface SdkPayload {
+    title: string;
+    description: string;
+    updatedAt: Date;
+    views: FrainViewJSON[];
+}
+
+export interface BackendModel {
+    projectId: string;
+    c4Model: SdkPayload;
+}
