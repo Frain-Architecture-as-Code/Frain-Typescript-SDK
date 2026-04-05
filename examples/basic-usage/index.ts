@@ -1,90 +1,36 @@
 import { Frain } from "../../src/frain";
-import { NodeType } from "../../src/types";
 
-async function main() {
+function main() {
     const frain = new Frain({
-        apiKey: "frain_a500b623c9ce7eff083004fc68fdf5bd079e8f7d3f031f94fded902c97c69e4e",
-        projectId: "58e54d63-36a6-48f9-836a-95a49e7fc27c",
-        frainApiUrl: "https://frain-api.vercel.app", // By Default https://frain-api.vercel.app
-        title: "ACME",
-        description: "This is a sample application",
+        title: "Demo",
+        description: "Some Description",
+        apiKey: "frain_0b4a4b4d83f830584f63f613067eeca9970f2be923ae0560d3b3ddda97bf0668",
+        projectId: "ef56b45f-0a6f-4120-aa69-13f898f64be8",
     });
 
     const context = frain.createContextView();
+    const user = context.addPerson({ name: "User", description: "" });
+    const developer = context.addPerson({ name: "Developer", description: "" });
 
-    const commonPerson = context.addPerson({
-        name: "John Doe",
-        description: "A person",
+    const system = context.addSystem({
+        name: "System",
+        description: "Some Detailed System",
     });
 
-    const frainSystem = context.addSystem({
-        name: "Frain",
-        description: "A system",
+    const externalSystem = context.addExternalSystem({
+        name: "External System",
+        description: "Some External thing",
     });
 
-    const paypal = context.addExternalSystem({
-        name: "Paypal",
-        description: "An external system",
+    const cloudProvider = context.addExternalSystem({
+        name: "Cloud Provider",
+        description: "Some External thing",
     });
 
-    commonPerson.use(frainSystem, "uses", "");
-    frainSystem.use(paypal, "uses", "As payment gateway");
+    [user, developer].forEach((p) => p.use(system, "Use", ""));
+    [externalSystem, cloudProvider].forEach((p) => system.use(p, "Use", ""));
 
-    // Create a container view
-    const container = frain.createContainerView(frainSystem);
-
-    const webapp = container.addContainer({
-        name: "Web App",
-        description: "A web application",
-        technology: "Next Js",
-    });
-
-    const api = container.addContainer({
-        name: "API",
-        description: "A Restfull API",
-        technology: "Spring Boot - Java 25",
-    });
-
-    const db = container.addContainer({
-        name: "Database",
-        description: "A database",
-        technology: "PostgreSQL",
-    });
-
-    webapp.use(api, "uses", "As API");
-    api.use(db, "uses", "As database");
-    api.use(paypal, "uses", "As payment gateway");
-
-    commonPerson.use(webapp, "uses", "");
-
-    // Styling
-    db.setType(NodeType.Database);
-
-    container.addNodes([commonPerson, paypal]);
-
-    // Create a Component view
-    const apiView = frain.createComponentView(api);
-
-    const sharedKernel = apiView.addComponent({
-        name: "Shared Kernel",
-        description: "A shared kernel",
-        technology: "Spring Boot - Java 25",
-    });
-
-    const payments = apiView.addComponent({
-        name: "Payments",
-        description: "A payments component",
-        technology: "Spring Boot - Java 25",
-    });
-
-    payments.use(paypal, "uses", "As payment gateway");
-    payments.use(sharedKernel, "uses", "As shared kernel");
-
-    webapp.use(payments, "uses", "As payment gateway");
-
-    apiView.addNodes([paypal, webapp]);
-
-    await frain.deploy();
+    frain.deploy();
 }
 
-await main();
+main();

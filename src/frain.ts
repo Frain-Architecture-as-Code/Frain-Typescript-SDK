@@ -14,6 +14,19 @@ import type {
     SdkPayload,
 } from "./types";
 
+axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (axios.isAxiosError(error)) {
+            console.error(
+                "Response body:",
+                JSON.stringify(error.response?.data, null, 4),
+            );
+        }
+        return { status: error.response?.status ?? 500 };
+    },
+);
+
 export class Frain {
     private projectId: string;
     private apiKey: string;
